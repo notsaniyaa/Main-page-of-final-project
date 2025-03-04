@@ -1,0 +1,167 @@
+/* === ОБЩИЕ СТИЛИ === */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  /* === СТИЛИ ДЛЯ НАВИГАЦИИ === */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ff7eb3;
+    padding: 15px 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+  }
+  
+  .navbar a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+  
+  /* === БАННЕР === */
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    text-align: center;
+    color: white;
+    font-size: 36px;
+    font-weight: 600;
+  }
+  
+  /* === РАЗДЕЛ МОРОЖЕНОГО === */
+  .ice-cream-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  .ice-cream-section h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ff7eb3;
+  }
+  
+  .ice-cream-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .ice-cream-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .ice-cream-item img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .ice-cream-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .ice-cream-item button {
+    margin-top: 10px;
+    background: #ff7eb3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+  }
+  
+  .ice-cream-item button:hover {
+    background: #ff5684;
+  }
+  
+  /* === СТИЛИ ДЛЯ КОРЗИНЫ === */
+  .cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-image {
+    width: 80px;
+    border-radius: 5px;
+  }
+  
+  .cart-item h3 {
+    font-size: 18px;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-controls button {
+    background: #ff7eb3;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 0 5px;
+  }
+  
+  .quantity-controls button:hover {
+    background: #ff5684;
+  }
+  
+  .remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 5px;
+  }
+  
+  .remove-btn:hover {
+    background: darkred;
+  }
+  
+  /* === ПОДВАЛ === */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background: #ff7eb3;
+    color: white;
+    font-weight: 600;
+  }
+  
