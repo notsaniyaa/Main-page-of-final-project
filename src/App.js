@@ -3,9 +3,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import AboutUs from "./pages/AboutUs"; // Добавили импорт AboutUs
-import { CartProvider } from "./context/cartContext"; // Провайдер корзины
-import OrderForm from "./pages/OrderForm"; // Импортируем страницу
+import AboutUs from "./pages/AboutUs"; 
+import { CartProvider } from "./context/cartContext"; 
+import OrderForm from "./pages/OrderForm"; 
 import Checkout from "./pages/Checkout"; 
 
 function App() {
