@@ -6,7 +6,7 @@ import Cart from "./pages/Cart";
 import AboutUs from "./pages/AboutUs"; // Добавили импорт AboutUs
 import { CartProvider } from "./context/cartContext"; // Провайдер корзины
 import OrderForm from "./pages/OrderForm"; // Импортируем страницу
-import Checkout from "./pages/Checkout"; // Убедись, что путь правильный
+import Checkout from "./pages/Checkout"; 
 
 function App() {
   return (
