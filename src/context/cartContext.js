@@ -1,15 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
 
-// Создаём контекст
 const CartContext = createContext();
 
-// Хук для использования контекста
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // Добавление товара в корзину
   const addToCart = (item) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
@@ -23,7 +20,6 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Функция обновления количества товара
   const updateQuantity = (id, newQuantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -31,8 +27,7 @@ export const CartProvider = ({ children }) => {
       )
     );
   };
-
-  // Удаление товара из корзины
+  
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };

@@ -1,14 +1,14 @@
-import { useCart } from "../context/cartContext"; // Подключаем контекст
+import { useCart } from "../context/cartContext"; 
 import iceCreams from "../data/iceCreams";
-import { useNavigate } from "react-router-dom"; // Навигация
+import { useNavigate } from "react-router-dom"; 
 
 function Home() {
   const { addToCart } = useCart();
-  const navigate = useNavigate(); // Хук для навигации
+  const navigate = useNavigate(); 
 
   return (
     <div style={styles.container}>
-      {/* БАННЕР */}
+
       <div style={styles.bannerSection}>
         <img src="/images/banner.jpg" alt="Ice Cream Shop" style={styles.banner} />
         <div style={styles.bannerText}>
@@ -20,10 +20,8 @@ function Home() {
         </div>
       </div>
 
-      {/* ЗАГОЛОВОК */}
       <h2 style={styles.title}>🍨 Our Ice Creams 🍨</h2>
 
-      {/* ВЫВОД МОРОЖЕНОГО */}
       <div style={styles.iceCreamGrid}>
         {iceCreams.map((iceCream) => (
           <div key={iceCream.id} style={styles.card}>
@@ -43,12 +41,10 @@ function Home() {
 const styles = {
   container: { padding: "20px", textAlign: "center" },
 
-  // СТИЛИ БАННЕРА
   bannerSection: { display: "flex", alignItems: "center", justifyContent: "center", gap: "20px", marginBottom: "30px" },
   banner: { width: "50%", borderRadius: "10px" },
   bannerText: { maxWidth: "40%", textAlign: "left", fontSize: "18px" },
 
-  // КНОПКА НАВИГАЦИИ
   exploreButton: {
     background: "#d9534f",
     color: "#fff",
@@ -61,10 +57,8 @@ const styles = {
     marginTop: "10px",
   },
 
-  // ЗАГОЛОВОК
   title: { fontSize: "26px", fontWeight: "bold", color: "#d9534f", marginBottom: "20px" },
 
-  // СЕТКА МОРОЖЕНОГО
   iceCreamGrid: { 
     display: "grid", 
     gridTemplateColumns: "repeat(3, 1fr)", 
@@ -73,7 +67,6 @@ const styles = {
     margin: "0 auto" 
   },
 
-  // СТИЛЬ КАРТОЧКИ
   card: { 
     padding: "15px", 
     border: "2px solid #ddd", 
@@ -84,7 +77,6 @@ const styles = {
     transition: "transform 0.2s" 
   },
 
-  // СТИЛЬ ИЗОБРАЖЕНИЯ
   image: { 
     width: "100px", 
     height: "100px", 
@@ -92,13 +84,10 @@ const styles = {
     objectFit: "cover" 
   },
 
-  // ИМЯ
   name: { fontSize: "18px", fontWeight: "bold", margin: "10px 0" },
 
-  // ЦЕНА
   price: { color: "#d9534f", fontSize: "16px", fontWeight: "bold" },
 
-  // КНОПКА
   button: { 
     background: "#d9534f", 
     color: "#fff", 
