@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
-
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
@@ -12,10 +11,12 @@ export const CartProvider = ({ children }) => {
       const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
       if (existingItem) {
         return prevCart.map((cartItem) =>
-          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1, totalPrice: (cartItem.quantity + 1) * cartItem.price }
+            : cartItem
         );
       } else {
-        return [...prevCart, { ...item, quantity: 1 }];
+        return [...prevCart, { ...item, quantity: 1, totalPrice: item.price }];
       }
     });
   };
@@ -23,11 +24,13 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (id, newQuantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
+        item.id === id
+          ? { ...item, quantity: Math.max(1, newQuantity), totalPrice: Math.max(1, newQuantity) * item.price }
+          : item
       )
     );
   };
-  
+
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
@@ -38,6 +41,5 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
-
 
 
