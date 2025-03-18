@@ -41,7 +41,7 @@ const Cart = () => {
                 />
                 <div style={styles.details}>
                   <h3>{item.name}</h3>
-                  <p style={styles.price}>${item.price}</p>
+                  <p style={styles.price}>KZT{item.price}</p>
                   <div style={styles.controls}>
                     <button onClick={() => updateQuantity(item.id, item.quantity - 1)} style={styles.button}>-</button>
                     <span style={styles.quantity}>{item.quantity}</span>
