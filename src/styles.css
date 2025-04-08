@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* === ОБЩИЕ СТИЛИ === */
+=======
+>>>>>>> main
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -6,8 +9,11 @@ body {
     background-color: #f8f8f8;
     color: #333;
   }
+<<<<<<< HEAD
   
   /* === СТИЛИ ДЛЯ НАВИГАЦИИ === */
+=======
+>>>>>>> main
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -29,8 +35,11 @@ body {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
   }
+<<<<<<< HEAD
   
   /* === БАННЕР === */
+=======
+>>>>>>> main
   .banner {
     display: flex;
     align-items: center;
@@ -41,8 +50,11 @@ body {
     font-size: 36px;
     font-weight: 600;
   }
+<<<<<<< HEAD
   
   /* === РАЗДЕЛ МОРОЖЕНОГО === */
+=======
+>>>>>>> main
   .ice-cream-section {
     max-width: 1200px;
     margin: 50px auto;
@@ -94,7 +106,10 @@ body {
     background: #ff5684;
   }
   
+<<<<<<< HEAD
   /* === СТИЛИ ДЛЯ КОРЗИНЫ === */
+=======
+>>>>>>> main
   .cart-container {
     max-width: 800px;
     margin: 50px auto;
@@ -156,7 +171,10 @@ body {
     background: darkred;
   }
   
+<<<<<<< HEAD
   /* === ПОДВАЛ === */
+=======
+>>>>>>> main
   .footer {
     text-align: center;
     padding: 20px;

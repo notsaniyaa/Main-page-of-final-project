@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useCart } from "../context/cartContext"; // Подключаем контекст
 import iceCreams from "../data/iceCreams";
 import { useNavigate } from "react-router-dom"; // Навигация
@@ -113,3 +114,12 @@ const styles = {
 
 export default Home;
 
+=======
+import HomeGridVirtualized from "../components/HomeGridVirtualized";
+
+function Home() {
+  return <HomeGridVirtualized />;
+}
+
+export default Home;
+>>>>>>> main
