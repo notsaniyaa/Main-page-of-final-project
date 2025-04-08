@@ -16,7 +16,6 @@ const Cart = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     alert("Order submitted!");
     console.log("Order details:", formData);
     setFormData({ name: "", email: "", address: "", phone: "" });

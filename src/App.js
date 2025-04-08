@@ -3,8 +3,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-import AboutUs from "./pages/AboutUs"; 
-import { CartProvider } from "./context/cartContext"; 
+import AboutUs from "./pages/AboutUs";
+import { CartProvider } from "./context/cartContext";
 
 function App() {
   return (
@@ -21,5 +21,6 @@ function App() {
     </CartProvider>
   );
 }
+
 export default App;
 
