@@ -3,13 +3,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
-<<<<<<< HEAD
-import AboutUs from "./pages/AboutUs"; // Добавили импорт AboutUs
-import { CartProvider } from "./context/cartContext"; // Провайдер корзины
-=======
 import AboutUs from "./pages/AboutUs";
 import { CartProvider } from "./context/cartContext";
->>>>>>> main
 
 function App() {
   return (
@@ -28,7 +23,3 @@ function App() {
 }
 
 export default App;
-<<<<<<< HEAD
-=======
-
->>>>>>> main
