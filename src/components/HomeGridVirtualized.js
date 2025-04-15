@@ -7,7 +7,7 @@ const COLUMN_COUNT = 4;
 const CARD_WIDTH = 240;
 const CARD_HEIGHT = 280;
 
-function HomeGridVirtualized() {
+function HomeGridVirtualized({ disableVirtualization = false }) {
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const rowCount = Math.ceil(iceCreams.length / COLUMN_COUNT);
@@ -18,7 +18,7 @@ function HomeGridVirtualized() {
     const iceCream = iceCreams[itemIndex];
 
     return (
-      <div style={{ ...style, padding: "10px", boxSizing: "border-box" }}>
+      <div data-testid="ice-cream-card" style={{ ...style, padding: "10px", boxSizing: "border-box" }}>
         <div style={styles.card}>
           <img src={`/images/${iceCream.image}`} alt={iceCream.name} style={styles.image} />
           <h3 style={styles.name}>{iceCream.name}</h3>
@@ -44,17 +44,30 @@ function HomeGridVirtualized() {
 
       <h2 style={styles.title}>🍨 Our Ice Creams 🍨</h2>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Grid
-          columnCount={COLUMN_COUNT}
-          columnWidth={CARD_WIDTH}
-          height={600}
-          rowCount={rowCount}
-          rowHeight={CARD_HEIGHT}
-          width={CARD_WIDTH * COLUMN_COUNT}
-        >
-          {Cell}
-        </Grid>
+      <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+        {disableVirtualization ? (
+          iceCreams.map((iceCream, index) => (
+            <div data-testid="ice-cream-card" key={index} style={{ padding: "10px" }}>
+              <div style={styles.card}>
+                <img src={`/images/${iceCream.image}`} alt={iceCream.name} style={styles.image} />
+                <h3 style={styles.name}>{iceCream.name}</h3>
+                <p style={styles.price}>{iceCream.price} KZT</p>
+                <button style={styles.button} onClick={() => addToCart(iceCream)}>Add to Cart</button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <Grid
+            columnCount={COLUMN_COUNT}
+            columnWidth={CARD_WIDTH}
+            height={600}
+            rowCount={rowCount}
+            rowHeight={CARD_HEIGHT}
+            width={CARD_WIDTH * COLUMN_COUNT}
+          >
+            {Cell}
+          </Grid>
+        )}
       </div>
     </div>
   );
