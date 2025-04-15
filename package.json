@@ -2,6 +2,7 @@
   "name": "ice-cream-shop",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://notsaniyaa.github.io/Main-page-of-final-project",
   "dependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
