@@ -20,7 +20,11 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
     return (
       <div data-testid="ice-cream-card" style={{ ...style, padding: "10px", boxSizing: "border-box" }}>
         <div style={styles.card}>
-          <img src={`/images/${iceCream.image}`} alt={iceCream.name} style={styles.image} />
+          <img
+            src={`${process.env.PUBLIC_URL}/images/${iceCream.image}`}
+            alt={iceCream.name}
+            style={styles.image}
+          />
           <h3 style={styles.name}>{iceCream.name}</h3>
           <p style={styles.price}>{iceCream.price} KZT</p>
           <button style={styles.button} onClick={() => addToCart(iceCream)}>Add to Cart</button>
@@ -32,7 +36,11 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
   return (
     <div style={styles.container}>
       <div style={styles.bannerSection}>
-        <img src="/images/banner.jpg" alt="Ice Cream Shop" style={styles.banner} />
+        <img
+          src={`${process.env.PUBLIC_URL}/images/banner.jpg`}
+          alt="Ice Cream Shop"
+          style={styles.banner}
+        />
         <div style={styles.bannerText}>
           <h2>Welcome to the Best Ice Cream Shop!</h2>
           <p>Enjoy the finest ice creams made with love 🍦</p>
@@ -49,7 +57,11 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
           iceCreams.map((iceCream, index) => (
             <div data-testid="ice-cream-card" key={index} style={{ padding: "10px" }}>
               <div style={styles.card}>
-                <img src={`/images/${iceCream.image}`} alt={iceCream.name} style={styles.image} />
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/${iceCream.image}`}
+                  alt={iceCream.name}
+                  style={styles.image}
+                />
                 <h3 style={styles.name}>{iceCream.name}</h3>
                 <p style={styles.price}>{iceCream.price} KZT</p>
                 <button style={styles.button} onClick={() => addToCart(iceCream)}>Add to Cart</button>
@@ -74,81 +86,81 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
 }
 
 const styles = {
-  container: {
-    padding: "20px",
-    textAlign: "center",
-    boxSizing: "border-box",
-  },
-  bannerSection: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "20px",
-    marginBottom: "30px",
-    flexWrap: "wrap",
-  },
-  banner: {
-    width: "100%",
-    maxWidth: "500px",
-    borderRadius: "10px",
-  },
-  bannerText: {
-    maxWidth: "500px",
-    textAlign: "left",
-    fontSize: "18px",
-  },
-  exploreButton: {
-    background: "#d9534f",
-    color: "#fff",
-    padding: "8px 12px",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "16px",
-    transition: "0.3s",
-    marginTop: "10px",
-  },
-  title: {
-    fontSize: "26px",
-    fontWeight: "bold",
-    color: "#d9534f",
-    marginBottom: "20px",
-  },
-  card: {
-    padding: "15px",
-    border: "2px solid #ddd",
-    borderRadius: "10px",
-    background: "#fff",
-    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-    textAlign: "center",
-    height: "100%",
-  },
-  image: {
-    width: "100px",
-    height: "100px",
-    borderRadius: "50%",
-    objectFit: "cover",
-  },
-  name: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    margin: "10px 0",
-  },
-  price: {
-    color: "#d9534f",
-    fontSize: "16px",
-    fontWeight: "bold",
-  },
-  button: {
-    background: "#d9534f",
-    color: "#fff",
-    padding: "8px 12px",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "16px",
-    transition: "0.3s",
-  },
-};
-
-export default HomeGridVirtualized;
+   container: {
+     padding: "20px",
+     textAlign: "center",
+     boxSizing: "border-box",
+   },
+   bannerSection: {
+     display: "flex",
+     alignItems: "center",
+     justifyContent: "center",
+     gap: "20px",
+     marginBottom: "30px",
+     flexWrap: "wrap",
+   },
+   banner: {
+     width: "100%",
+     maxWidth: "500px",
+     borderRadius: "10px",
+   },
+   bannerText: {
+     maxWidth: "500px",
+     textAlign: "left",
+     fontSize: "18px",
+   },
+   exploreButton: {
+     background: "#d9534f",
+     color: "#fff",
+     padding: "8px 12px",
+     border: "none",
+     borderRadius: "5px",
+     cursor: "pointer",
+     fontSize: "16px",
+     transition: "0.3s",
+     marginTop: "10px",
+   },
+   title: {
+     fontSize: "26px",
+     fontWeight: "bold",
+     color: "#d9534f",
+     marginBottom: "20px",
+   },
+   card: {
+     padding: "15px",
+     border: "2px solid #ddd",
+     borderRadius: "10px",
+     background: "#fff",
+     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+     textAlign: "center",
+     height: "100%",
+   },
+   image: {
+     width: "100px",
+     height: "100px",
+     borderRadius: "50%",
+     objectFit: "cover",
+   },
+   name: {
+     fontSize: "18px",
+     fontWeight: "bold",
+     margin: "10px 0",
+   },
+   price: {
+     color: "#d9534f",
+     fontSize: "16px",
+     fontWeight: "bold",
+   },
+   button: {
+     background: "#d9534f",
+     color: "#fff",
+     padding: "8px 12px",
+     border: "none",
+     borderRadius: "5px",
+     cursor: "pointer",
+     fontSize: "16px",
+     transition: "0.3s",
+   },
+ };
+ 
+ export default HomeGridVirtualized;

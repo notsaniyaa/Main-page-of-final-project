@@ -13,7 +13,11 @@ function AboutUs() {
           Whether you love classic flavors like vanilla and chocolate, or want to try unique options like mango and pistachio, we have something for everyone.
         </p>
       </div>
-      <img src="/images/banner.jpg" alt="Ice Cream Shop" style={styles.image} />
+      <img 
+        src={`${process.env.PUBLIC_URL}/images/banner.jpg`} 
+        alt="Ice Cream Shop" 
+        style={styles.image} 
+      />
     </div>
   );
 }
