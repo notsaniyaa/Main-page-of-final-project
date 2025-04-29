@@ -39,7 +39,7 @@ const styles = {
     fontWeight: "bold",
   },
   socials: {
-    marginTop: "10px",
+    marginTop: "auto",
     display: "flex",
     gap: "20px",
   },

@@ -1,12 +1,48 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { auth } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 function Navbar() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <nav style={styles.navbar}>
-      <Link to="/" style={styles.link}>Home</Link>
-      <Link to="/about" style={styles.link}>About Us</Link>
-      <Link to="/cart" style={styles.link}>Cart</Link>
-      <a href="#contact" style={styles.link}>Contact Us</a>
+      <div style={styles.leftLinks}>
+        <Link to="/" style={styles.link}>Home</Link>
+        <Link to="/about" style={styles.link}>About Us</Link>
+        <Link to="/cart" style={styles.link}>Cart</Link>
+        <a href="#contact" style={styles.link}>Contact Us</a>
+      </div>
+
+      <div style={styles.authLinks}>
+        {user ? (
+          <>
+            <span style={styles.userText}>Hi, {user.email}</span>
+            <button onClick={handleLogout} style={styles.button}>Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" style={styles.buttonLink}>Login</Link>
+            <Link to="/register" style={styles.buttonLink}>Register</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
@@ -14,22 +50,58 @@ function Navbar() {
 const styles = {
   navbar: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "15px 40px",
+    background: "linear-gradient(90deg, #ff8a8a, #ffcccc)",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    position: "sticky",
+    top: 0,
+    zIndex: 100,
+  },
+  leftLinks: {
+    display: "flex",
     gap: "25px",
-    padding: "15px",
-    background: "#ff6666",
-    boxShadow: "0px 4px 8px rgba(0,0,0,0.1)",
+  },
+  authLinks: {
+    display: "flex",
+    gap: "20px",
+    alignItems: "center",
   },
   link: {
-    color: "white",
+    color: "#fff",
     textDecoration: "none",
     fontSize: "18px",
-    fontWeight: "bold",
-    transition: "color 0.3s",
+    fontWeight: "600",
+    transition: "all 0.3s",
+  },
+  buttonLink: {
+    backgroundColor: "#ffffff",
+    color: "#ff6666",
+    padding: "8px 16px",
+    borderRadius: "8px",
+    fontWeight: "600",
+    textDecoration: "none",
+    transition: "all 0.3s",
+    fontSize: "16px",
+    border: "2px solid #ff6666",
+  },
+  button: {
+    backgroundColor: "#ffffff",
+    color: "#ff6666",
+    padding: "8px 16px",
+    borderRadius: "8px",
+    fontWeight: "600",
+    border: "2px solid #ff6666",
+    cursor: "pointer",
+    transition: "all 0.3s",
+    fontSize: "16px",
+  },
+  userText: {
+    color: "#fff",
+    fontSize: "16px",
+    fontWeight: "600",
   },
 };
 
 export default Navbar;
-
-
-
