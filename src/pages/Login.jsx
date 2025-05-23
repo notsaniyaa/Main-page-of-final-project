@@ -1,18 +1,27 @@
 import { useState, useEffect } from "react";
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser) {
+        navigate("/"); // ✅ редирект на Home после входа
+      }
     });
     return () => unsubscribe();
-  }, []);
+  }, [navigate]);
 
   const handleLogin = async () => {
     try {
@@ -32,37 +41,48 @@ function Login() {
     }
   };
 
+  if (user) {
+    return (
+      <div style={styles.container}>
+        <h2>Вход выполнен как: {user.email}</h2>
+        <img
+          src={user.photoURL || "https://via.placeholder.com/100"}
+          alt="Avatar"
+          style={{ width: "100px", height: "100px", borderRadius: "50%" }}
+        />
+        <button onClick={handleLogout} style={styles.button}>
+          Logout
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div style={styles.container}>
-      {user ? (
-        <>
-          <h2>Logged in as: {user.email}</h2>
-          <button onClick={handleLogout} style={styles.button}>
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <h2>Login</h2>
-          <input
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-          />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-          />
-          <button onClick={handleLogin} style={styles.button}>
-            Login
-          </button>
-        </>
-      )}
+      <h2>Login</h2>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={styles.input}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={styles.input}
+      />
+      <button onClick={handleLogin} style={styles.button}>
+        Sign in
+      </button>
+      <p style={styles.link}>
+        Forgot password? <a href="/forgot-password">Reset</a>
+      </p>
+      <p style={styles.link}>
+        Don't have an account? <a href="/register">Create an account</a>
+      </p>
     </div>
   );
 }
@@ -96,7 +116,10 @@ const styles = {
     fontSize: "16px",
     border: "none",
     cursor: "pointer",
-    transition: "background 0.3s",
+  },
+  link: {
+    marginTop: "10px",
+    fontSize: "14px",
   },
 };
 

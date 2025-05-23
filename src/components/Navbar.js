@@ -2,9 +2,23 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import useUserRole from "../hooks/useUserRole";
+import { FaUserCircle } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
+import NotificationBell from "./NotificationBell";
+import { useTranslation } from "react-i18next";
+
+const Header = () => {
+  const { t } = useTranslation();
+
+  return <h1>{t("welcome")}</h1>;
+};
+
 
 function Navbar() {
   const [user, setUser] = useState(null);
+  const { role, loading } = useUserRole(); // ✅ исправлено
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -21,19 +35,38 @@ function Navbar() {
     }
   };
 
+  // 🔄 Пока загружается роль, не показываем навбар
+  {user && !loading && (
+  <div style={{ color: "white" }}>
+    <p>🧪 Role: {role}</p>
+    <p>👤 UID: {user.uid}</p>
+  </div>
+)}
+
+
   return (
     <nav style={styles.navbar}>
       <div style={styles.leftLinks}>
         <Link to="/" style={styles.link}>Home</Link>
         <Link to="/about" style={styles.link}>About Us</Link>
         <Link to="/cart" style={styles.link}>Cart</Link>
+        {role === "admin" && (
+          <Link to="/admin" style={styles.link}>Admin Panel</Link>
+        )}
         <a href="#contact" style={styles.link}>Contact Us</a>
       </div>
 
       <div style={styles.authLinks}>
+        <button onClick={toggleTheme} style={styles.toggleButton}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         {user ? (
           <>
-            <span style={styles.userText}>Hi, {user.email}</span>
+            <NotificationBell />
+            <Link to="/profile" style={styles.iconLink}>
+              <FaUserCircle size={28} />
+            </Link>
             <button onClick={handleLogout} style={styles.button}>Logout</button>
           </>
         ) : (
@@ -97,10 +130,17 @@ const styles = {
     transition: "all 0.3s",
     fontSize: "16px",
   },
-  userText: {
+  toggleButton: {
+    backgroundColor: "transparent",
     color: "#fff",
-    fontSize: "16px",
-    fontWeight: "600",
+    fontSize: "24px",
+    border: "none",
+    cursor: "pointer",
+  },
+  iconLink: {
+    color: "#fff",
+    textDecoration: "none",
+    transition: "all 0.3s",
   },
 };
 

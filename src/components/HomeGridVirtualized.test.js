@@ -12,6 +12,5 @@ test("renders ice cream list with virtualization", () => {
     </BrowserRouter>
   );
 
-  // Проверим заголовок
   expect(screen.getByText(/Our Ice Creams/i)).toBeInTheDocument();
 });

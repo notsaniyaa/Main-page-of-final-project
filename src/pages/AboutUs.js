@@ -1,57 +1,85 @@
 import React from "react";
+import { useTheme } from "../context/ThemeContext";
+import ReviewSection from "../components/ReviewSection";
+import { useTranslation } from 'react-i18next';
 
 function AboutUs() {
+  const { theme } = useTheme(); 
+  const isDark = theme === "dark";
+  const { t } = useTranslation();
+  
+  const styles = {
+    page: {
+      background: isDark ? "#1e1e2f" : "#f8f8f8",
+      color: isDark ? "#f2f2f2" : "#444",
+      minHeight: "100vh",
+      paddingBottom: "50px",
+    },
+    container: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "60px 20px 30px",
+      flexWrap: "wrap",
+      maxWidth: "1200px",
+      margin: "0 auto",
+    },
+    textContainer: {
+      maxWidth: "600px",
+      textAlign: "left",
+      marginRight: "40px",
+      marginBottom: "30px",
+    },
+    title: {
+      fontSize: "40px",
+      fontWeight: "bold",
+      marginBottom: "20px",
+      color: isDark ? "#ff8ca3" : "#ff6666",
+    },
+    text: {
+      fontSize: "18px",
+      lineHeight: "1.6",
+      color: isDark ? "#dcdcdc" : "#444",
+    },
+    image: {
+      width: "400px",
+      borderRadius: "16px",
+      boxShadow: isDark
+        ? "0px 4px 20px rgba(255, 255, 255, 0.1)"
+        : "0px 4px 20px rgba(0, 0, 0, 0.1)",
+    },
+    reviewsWrapper: {
+      display: "flex",
+      justifyContent: "center",
+      padding: "30px 20px",
+      background: isDark ? "#121212" : "#ffffff",
+    },
+  };
+
   return (
-    <div style={styles.container}>
-      <div style={styles.textContainer}>
-        <h1 style={styles.title}>About Us</h1>
-        <p style={styles.text}>
-          Welcome to Ice Cream Shop! We offer the most delicious and natural ice cream made from high-quality ingredients. 
-          Our goal is to bring joy with every scoop!
-        </p>
-        <p style={styles.text}>
-          Whether you love classic flavors like vanilla and chocolate, or want to try unique options like mango and pistachio, we have something for everyone.
-        </p>
+    <div style={styles.page}>
+      <div style={styles.container}>
+        <div style={styles.textContainer}>
+          <h1 style={styles.title}>{t("About Us")}</h1>
+          <p style={styles.text}>
+            {t("Welcome to Ice Cream Shop! We offer the most delicious and natural ice cream made from high-quality ingredients. Our goal is to bring joy with every scoop!")}
+          </p>
+          <p style={styles.text}>
+            {t("Whether you love classic flavors like vanilla and chocolate, or want to try unique options like mango and pistachio, we have something for everyone.")}
+          </p>
+        </div>
+        <img
+          src={`${process.env.PUBLIC_URL}/images/banner.jpg`}
+          alt={t("Ice Cream Shop")}
+          style={styles.image}
+        />
       </div>
-      <img 
-        src={`${process.env.PUBLIC_URL}/images/banner.jpg`} 
-        alt="Ice Cream Shop" 
-        style={styles.image} 
-      />
+
+      <div style={styles.reviewsWrapper}>
+        <ReviewSection />
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "50px",
-    background: "#f8f8f8",
-    minHeight: "80vh",
-  },
-  textContainer: {
-    maxWidth: "600px",
-    textAlign: "left",
-    marginRight: "50px",
-  },
-  title: {
-    fontSize: "36px",
-    fontWeight: "bold",
-    marginBottom: "20px",
-    color: "#ff6666",
-  },
-  text: {
-    fontSize: "18px",
-    lineHeight: "1.6",
-    color: "#444",
-  },
-  image: {
-    width: "400px",
-    borderRadius: "10px",
-    boxShadow: "0px 4px 8px rgba(0,0,0,0.2)",
-  },
-};
 
 export default AboutUs;

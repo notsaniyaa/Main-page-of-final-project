@@ -6,6 +6,62 @@ body {
     background-color: #f8f8f8;
     color: #333;
   }
+  /* Пример улучшенной темной темы */
+body.dark {
+  background-color: #1a1a2efb;
+
+  color: #868181;
+}
+
+.card.dark {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  color: #f5f5f5;
+}
+
+.navbar.dark, .footer.dark {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.button-dark {
+  background-color: #f06292;
+  color: #fff;
+}
+.button-primary {
+  background-color: #ff7eb3;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-primary:hover {
+  background-color: #ff5684;
+}
+
+.button-danger {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button-danger:hover {
+  background-color: #cc0000;
+}
+
+
+
+/* Стили для кнопок можно адаптировать */
+
   
   /* === СТИЛИ ДЛЯ НАВИГАЦИИ === */
   .navbar {
