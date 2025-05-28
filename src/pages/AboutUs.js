@@ -1,12 +1,10 @@
 import React from "react";
 import { useTheme } from "../context/ThemeContext";
 import ReviewSection from "../components/ReviewSection";
-import { useTranslation } from 'react-i18next';
 
 function AboutUs() {
   const { theme } = useTheme(); 
   const isDark = theme === "dark";
-  const { t } = useTranslation();
   
   const styles = {
     page: {
@@ -60,17 +58,17 @@ function AboutUs() {
     <div style={styles.page}>
       <div style={styles.container}>
         <div style={styles.textContainer}>
-          <h1 style={styles.title}>{t("About Us")}</h1>
+          <h1 style={styles.title}>{("About Us")}</h1>
           <p style={styles.text}>
-            {t("Welcome to Ice Cream Shop! We offer the most delicious and natural ice cream made from high-quality ingredients. Our goal is to bring joy with every scoop!")}
+            {("Welcome to Ice Cream Shop! We offer the most delicious and natural ice cream made from high-quality ingredients. Our goal is to bring joy with every scoop!")}
           </p>
           <p style={styles.text}>
-            {t("Whether you love classic flavors like vanilla and chocolate, or want to try unique options like mango and pistachio, we have something for everyone.")}
+            {("Whether you love classic flavors like vanilla and chocolate, or want to try unique options like mango and pistachio, we have something for everyone.")}
           </p>
         </div>
         <img
           src={`${process.env.PUBLIC_URL}/images/banner.jpg`}
-          alt={t("Ice Cream Shop")}
+          alt={("Ice Cream Shop")}
           style={styles.image}
         />
       </div>

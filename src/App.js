@@ -13,7 +13,6 @@ import AboutUs from "./pages/AboutUs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
-import AdminPanel from "./pages/AdminPanel";
 import Profile from "./pages/Profile";
 
 // Context
@@ -21,10 +20,6 @@ import { CartProvider } from "./context/cartContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { NotificationProvider } from "./context/NotificationContext";
 
-// Routes
-import { AdminRoute } from "./AdminRoute";
-
-import './i18n';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -53,7 +48,6 @@ function App() {
                   <Route path="/about" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
                   <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
                   <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                  <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
 
                   {/* Public Routes */}
                   <Route path="/login" element={<Login />} />

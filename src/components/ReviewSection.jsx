@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; 
 import { db, auth } from "../firebase";
 import {
   collection,
@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useTheme } from "../context/ThemeContext";
+import useUserRole from "../hooks/useUserRole"; 
 
 function ReviewSection() {
   const [user, setUser] = useState(null);
@@ -19,6 +20,7 @@ function ReviewSection() {
   const [rating, setRating] = useState(5);
   const [reviews, setReviews] = useState([]);
 
+  const { role, loading } = useUserRole(); 
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
@@ -120,8 +122,13 @@ function ReviewSection() {
             ))}
           </div>
           <p>{review.comment}</p>
-          {user?.uid === review.userId && (
-            <button onClick={() => handleDelete(review.id)} className="button-danger" style={{ marginTop: "6px" }}>
+
+          {(user?.uid === review.userId || role === "admin") && (
+            <button
+              onClick={() => handleDelete(review.id)}
+              className="button-danger"
+              style={{ marginTop: "6px" }}
+            >
               Delete
             </button>
           )}

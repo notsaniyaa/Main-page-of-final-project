@@ -6,18 +6,11 @@ import useUserRole from "../hooks/useUserRole";
 import { FaUserCircle } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import NotificationBell from "./NotificationBell";
-import { useTranslation } from "react-i18next";
-
-const Header = () => {
-  const { t } = useTranslation();
-
-  return <h1>{t("welcome")}</h1>;
-};
 
 
 function Navbar() {
   const [user, setUser] = useState(null);
-  const { role, loading } = useUserRole(); // ✅ исправлено
+  const { role} = useUserRole(); 
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -35,14 +28,6 @@ function Navbar() {
     }
   };
 
-  // 🔄 Пока загружается роль, не показываем навбар
-  {user && !loading && (
-  <div style={{ color: "white" }}>
-    <p>🧪 Role: {role}</p>
-    <p>👤 UID: {user.uid}</p>
-  </div>
-)}
-
 
   return (
     <nav style={styles.navbar}>
@@ -50,9 +35,6 @@ function Navbar() {
         <Link to="/" style={styles.link}>Home</Link>
         <Link to="/about" style={styles.link}>About Us</Link>
         <Link to="/cart" style={styles.link}>Cart</Link>
-        {role === "admin" && (
-          <Link to="/admin" style={styles.link}>Admin Panel</Link>
-        )}
         <a href="#contact" style={styles.link}>Contact Us</a>
       </div>
 

@@ -17,7 +17,7 @@ function Login() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        navigate("/"); // ✅ редирект на Home после входа
+        navigate("/"); 
       }
     });
     return () => unsubscribe();

@@ -1,26 +1,24 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore"; // Добавляем Firestore
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { auth } from "../firebase";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState(""); // Новое состояние для username
+  const [username, setUsername] = useState(""); 
 
-  const db = getFirestore(); // Инициализация Firestore
+  const db = getFirestore(); 
 
   const handleRegister = async () => {
     try {
-      // Регистрация пользователя в Firebase Auth
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Сохранение данных пользователя в Firestore
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         email: user.email,
         username: username,
-        role: "user",
+        role: "user", 
         createdAt: new Date(),
       });
 

@@ -1,10 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged, updateProfile } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useTheme } from "../context/ThemeContext";
-import { useTranslation } from "react-i18next";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -17,7 +14,6 @@ function Profile() {
   const [loading, setLoading] = useState(false);
 
   const { theme, setTheme } = useTheme();
-  const { i18n } = useTranslation();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -25,10 +21,9 @@ function Profile() {
         setUser(currentUser);
         setDisplayName(currentUser.displayName || "");
         setEmail(currentUser.email || "");
-        setPhotoURL(currentUser.photoURL || "");
-        const savedLang = localStorage.getItem("lang") || "en";
-        setLanguage(savedLang);
-        i18n.changeLanguage(savedLang);
+
+        const localPhoto = localStorage.getItem(`avatar_${currentUser.uid}`);
+        setPhotoURL(localPhoto || currentUser.photoURL || "");
       }
     });
     return () => unsubscribe();
@@ -39,18 +34,23 @@ function Profile() {
     setLoading(true);
 
     try {
-      let newPhotoURL = photoURL;
-
       if (newAvatar) {
-        const storage = getStorage();
-        const storageRef = ref(storage, `avatars/${user.uid}`);
-        await uploadBytes(storageRef, newAvatar);
-        newPhotoURL = await getDownloadURL(storageRef);
+        const toBase64 = (file) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+          });
+
+        const base64 = await toBase64(newAvatar);
+
+        localStorage.setItem(`avatar_${user.uid}`, base64);
+        setPhotoURL(base64);
       }
 
       await updateProfile(auth.currentUser, {
         displayName,
-        photoURL: newPhotoURL,
       });
 
       await auth.currentUser.reload();
@@ -58,7 +58,6 @@ function Profile() {
 
       setUser(updatedUser);
       setDisplayName(updatedUser.displayName || "");
-      setPhotoURL(updatedUser.photoURL || "");
       setNewAvatar(null);
       setIsEditing(false);
       alert("Профиль обновлён");
@@ -68,12 +67,6 @@ function Profile() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-    i18n.changeLanguage(lang);
-    localStorage.setItem("lang", lang);
   };
 
   return (
@@ -112,11 +105,11 @@ function Profile() {
         <select
           value={language}
           disabled={!isEditing}
-          onChange={(e) => handleLanguageChange(e.target.value)}
+          onChange={(e) => setLanguage(e.target.value)}
           style={isEditing ? styles.input : styles.inputDisabled}
         >
           <option value="en">English</option>
-          <option value="ru">Русский</option>
+          <option value="ru">Russian</option>
         </select>
 
         <label style={styles.label}>Theme</label>

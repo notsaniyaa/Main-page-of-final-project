@@ -1,13 +1,13 @@
+import { useState, useMemo, useEffect } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
-import iceCreams from "../data/iceCreams";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cartContext";
-import { useState, useMemo, useEffect } from "react";
+import iceCreams from "../data/iceCreams";
 
 const CARD_WIDTH = 240;
 const CARD_HEIGHT = 280;
 
-function HomeGridVirtualized({ disableVirtualization = false }) {
+function HomeGridVirtualized({ disableVirtualization = false, onEdit = null }) {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
@@ -55,7 +55,11 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
     const iceCream = filteredIceCreams[itemIndex];
 
     return (
-      <div data-testid="ice-cream-card" style={{ ...style, padding: "10px", boxSizing: "border-box" }}>
+      <div
+        data-testid="ice-cream-card"
+        style={{ ...style, padding: "10px", boxSizing: "border-box" }}
+        onClick={() => onEdit && onEdit(iceCream)}
+      >
         <div style={styles.card}>
           <img
             src={`${process.env.PUBLIC_URL}/images/${iceCream.image}`}
@@ -64,7 +68,15 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
           />
           <h3 style={styles.name}>{iceCream.name}</h3>
           <p style={styles.price}>{iceCream.price} KZT</p>
-          <button style={styles.button} onClick={() => addToCart(iceCream)}>Add to Cart</button>
+          <button
+            style={styles.button}
+            onClick={(e) => {
+              e.stopPropagation(); 
+              addToCart(iceCream);
+            }}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     );
@@ -97,18 +109,30 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
           onChange={(e) => setSearchTerm(e.target.value)}
           style={styles.input}
         />
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={styles.select}>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          style={styles.select}
+        >
           <option value="name">Sort by Name</option>
           <option value="price">Sort by Price</option>
         </select>
-        <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} style={styles.select}>
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+          style={styles.select}
+        >
           <option value="All">All Categories</option>
           <option value="Classic">Classic</option>
           <option value="Fruity">Fruity</option>
           <option value="Nutty">Nutty</option>
           <option value="Fresh">Fresh</option>
         </select>
-        <select value={filterTag} onChange={(e) => setFilterTag(e.target.value)} style={styles.select}>
+        <select
+          value={filterTag}
+          onChange={(e) => setFilterTag(e.target.value)}
+          style={styles.select}
+        >
           <option value="All">All Tags</option>
           <option value="sweet">Sweet</option>
           <option value="basic">Basic</option>
@@ -126,7 +150,12 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
       <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
         {disableVirtualization ? (
           filteredIceCreams.map((iceCream, index) => (
-            <div data-testid="ice-cream-card" key={index} style={{ padding: "10px" }}>
+            <div
+              data-testid="ice-cream-card"
+              key={index}
+              style={{ padding: "10px" }}
+              onClick={() => onEdit && onEdit(iceCream)}
+            >
               <div style={styles.card}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/${iceCream.image}`}
@@ -135,7 +164,15 @@ function HomeGridVirtualized({ disableVirtualization = false }) {
                 />
                 <h3 style={styles.name}>{iceCream.name}</h3>
                 <p style={styles.price}>{iceCream.price} KZT</p>
-                <button style={styles.button} onClick={() => addToCart(iceCream)}>Add to Cart</button>
+                <button
+                  style={styles.button}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart(iceCream);
+                  }}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))
